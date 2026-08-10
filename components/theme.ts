@@ -8,6 +8,12 @@ export const brand = {
   ember: "#FB862C", // uitsluitend CTA's en doorgehaalde oude prijzen
 };
 
+// Nieuwsbrief-specifieke tokens (bron: Figma "Nieuwsbrief"-bestand)
+export const newsletter = {
+  ink: "#141414", // header/footer en tekst in de nieuwsbriefserie
+  border: "#D6D6D6",
+};
+
 // E-mailclients hebben zelden custom fonts; Recoleta/Basis vallen terug
 // op systeemfonts met vergelijkbaar karakter.
 export const font = {

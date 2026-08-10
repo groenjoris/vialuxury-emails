@@ -1,6 +1,7 @@
 import type * as React from "react";
 import BookingConfirmation from "@/emails/booking-confirmation";
 import DealAlert from "@/emails/deal-alert";
+import WelkomMail1A from "@/emails/welkom-mail-1a";
 
 export type EmailEntry = {
   slug: string;
@@ -11,6 +12,12 @@ export type EmailEntry = {
 };
 
 export const emails: EmailEntry[] = [
+  {
+    slug: "welkom-mail-1a",
+    title: "Welkom (Mail 1A)",
+    description: "Welkomstmail na eerste boeking: account, FAQ, deal-opt-in en thema-inspiratie. Naar Figma-ontwerp 'Nieuwsbrief'.",
+    Component: WelkomMail1A,
+  },
   {
     slug: "booking-confirmation",
     title: "Boekingsbevestiging",
