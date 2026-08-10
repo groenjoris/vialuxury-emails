@@ -136,6 +136,36 @@ a {
   font-size: 14px;
 }
 
+.section-divider {
+  border: 0;
+  border-top: 1px solid #dcdcdc;
+  margin: 48px 0 32px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 24px;
+  color: var(--teal-dark);
+}
+
+.btn-group {
+  display: inline-flex;
+  gap: 4px;
+  background: #ececec;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.btn-group .btn {
+  border: 0;
+  background: transparent;
+}
+
+.btn-group .btn.active {
+  background: var(--teal-dark);
+  color: #fff;
+}
+
 .toolbar {
   display: flex;
   align-items: center;

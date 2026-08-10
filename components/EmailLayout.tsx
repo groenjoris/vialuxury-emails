@@ -10,19 +10,28 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import { baseUrl, brand, font } from "./theme";
+import { baseUrl, brand, font, type EmailMode } from "./theme";
 
 type Props = {
   preview: string;
+  mode?: EmailMode;
   children: React.ReactNode;
 };
 
-export default function EmailLayout({ preview, children }: Props) {
+export default function EmailLayout({ preview, mode = "light", children }: Props) {
+  const dark = mode === "dark";
   return (
     <Html lang="nl">
       <Head />
       <Preview>{preview}</Preview>
-      <Body style={{ backgroundColor: brand.cloud, margin: 0, padding: "24px 0", fontFamily: font.body }}>
+      <Body
+        style={{
+          backgroundColor: dark ? "#1E1E1E" : brand.cloud,
+          margin: 0,
+          padding: "24px 0",
+          fontFamily: font.body,
+        }}
+      >
         <Container style={{ width: "600px", maxWidth: "600px" }}>
           <Section
             style={{
@@ -43,7 +52,7 @@ export default function EmailLayout({ preview, children }: Props) {
 
           <Section
             style={{
-              backgroundColor: brand.ink,
+              backgroundColor: dark ? "#111111" : brand.ink,
               borderRadius: "0 0 12px 12px",
               padding: "24px 32px",
             }}

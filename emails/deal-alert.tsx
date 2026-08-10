@@ -9,9 +9,10 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import EmailLayout from "../components/EmailLayout";
-import { brand, font } from "../components/theme";
+import { brand, font, type EmailMode } from "../components/theme";
 
 type Props = {
+  mode?: EmailMode;
   dealTitle: string;
   location: string;
   stars: string;
@@ -33,10 +34,17 @@ export default function DealAlert({
   priceSuffix,
   perks,
   imageUrl,
+  mode = "light",
 }: Props) {
+  const dark = mode === "dark";
+  const cardBg = dark ? "#2D2D2D" : brand.white;
+  const boxBg = dark ? "#3A3A3A" : brand.cloud;
+  const inkText = dark ? "#E0E0E0" : brand.ink;
+  const headingColor = dark ? brand.tealLight : brand.tealDark;
+  const mutedText = dark ? "#A8A8A8" : "#6B6B6B";
   return (
-    <EmailLayout preview={`${dealTitle} — nu vanaf ${newPrice} ${priceSuffix}`}>
-      <Section style={{ backgroundColor: brand.white }}>
+    <EmailLayout preview={`${dealTitle} — nu vanaf ${newPrice} ${priceSuffix}`} mode={mode}>
+      <Section style={{ backgroundColor: cardBg }}>
         <Img
           src={imageUrl}
           alt={dealTitle}
@@ -46,10 +54,10 @@ export default function DealAlert({
         />
       </Section>
 
-      <Section style={{ backgroundColor: brand.white, padding: "28px 32px 32px" }}>
+      <Section style={{ backgroundColor: cardBg, padding: "28px 32px 32px" }}>
         <Text
           style={{
-            color: brand.tealDark,
+            color: headingColor,
             fontSize: "13px",
             fontWeight: 700,
             letterSpacing: "1px",
@@ -66,23 +74,23 @@ export default function DealAlert({
             fontWeight: 600,
             fontSize: "26px",
             lineHeight: "34px",
-            color: brand.ink,
+            color: inkText,
             margin: "0 0 4px",
           }}
         >
           {dealTitle}
         </Heading>
-        <Text style={{ color: "#6B6B6B", fontSize: "14px", margin: "0 0 16px" }}>{location}</Text>
+        <Text style={{ color: mutedText, fontSize: "14px", margin: "0 0 16px" }}>{location}</Text>
 
-        <Text style={{ color: brand.ink, fontSize: "15px", lineHeight: "24px", margin: "0 0 20px" }}>
+        <Text style={{ color: inkText, fontSize: "15px", lineHeight: "24px", margin: "0 0 20px" }}>
           {description}
         </Text>
 
-        <Section style={{ backgroundColor: brand.cloud, borderRadius: "8px", padding: "16px 20px" }}>
+        <Section style={{ backgroundColor: boxBg, borderRadius: "8px", padding: "16px 20px" }}>
           {perks.map((perk) => (
             <Text
               key={perk}
-              style={{ color: brand.ink, fontSize: "14px", lineHeight: "24px", margin: 0 }}
+              style={{ color: inkText, fontSize: "14px", lineHeight: "24px", margin: 0 }}
             >
               ✓&nbsp;&nbsp;{perk}
             </Text>
@@ -105,14 +113,14 @@ export default function DealAlert({
               style={{
                 fontFamily: font.heading,
                 fontWeight: 600,
-                color: brand.tealDark,
+                color: headingColor,
                 fontSize: "30px",
                 lineHeight: "36px",
                 margin: 0,
               }}
             >
               {newPrice}
-              <span style={{ fontSize: "14px", color: "#6B6B6B", fontFamily: font.body, fontWeight: 400 }}>
+              <span style={{ fontSize: "14px", color: mutedText, fontFamily: font.body, fontWeight: 400 }}>
                 {" "}
                 {priceSuffix}
               </span>

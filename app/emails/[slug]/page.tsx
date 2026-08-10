@@ -16,6 +16,11 @@ export default async function EmailPreviewPage({
   const entry = getEmail(slug);
   if (!entry) notFound();
 
-  const html = await renderEmail(entry);
-  return <PreviewShell title={entry.title} slug={entry.slug} html={html} />;
+  const [htmlLight, htmlDark] = await Promise.all([
+    renderEmail(entry, "light"),
+    renderEmail(entry, "dark"),
+  ]);
+  return (
+    <PreviewShell title={entry.title} slug={entry.slug} htmlLight={htmlLight} htmlDark={htmlDark} />
+  );
 }

@@ -11,12 +11,14 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const html = await renderEmail(entry);
+  const { searchParams } = new URL(request.url);
+  const mode = searchParams.get("mode") === "dark" ? "dark" : "light";
+
+  const html = await renderEmail(entry, mode);
   const headers = new Headers({ "Content-Type": "text/html; charset=utf-8" });
 
-  const { searchParams } = new URL(request.url);
   if (searchParams.has("download")) {
-    headers.set("Content-Disposition", `attachment; filename="${slug}.html"`);
+    headers.set("Content-Disposition", `attachment; filename="${slug}-${mode}.html"`);
   }
 
   return new Response(html, { headers });
