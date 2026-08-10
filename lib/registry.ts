@@ -5,6 +5,7 @@ import Mail1B from "@/emails/mail-1b";
 import Mail2Reminder from "@/emails/mail-2-reminder";
 import Mail3Reminder from "@/emails/mail-3-reminder";
 import WelkomMail1A from "@/emails/welkom-mail-1a";
+import WelkomMail1AIcons from "@/emails/welkom-mail-1a-icons";
 import WelkomMail1Fan from "@/emails/welkom-mail-1-fan";
 
 export type EmailSection = "designs" | "inspiration";
@@ -26,6 +27,13 @@ export const emails: EmailEntry[] = [
     description: "Welkomstmail na eerste boeking: account, FAQ, deal-opt-in en thema-inspiratie. Naar Figma-ontwerp 'Nieuwsbrief'.",
     section: "designs",
     Component: WelkomMail1A,
+  },
+  {
+    slug: "welkom-mail-1a-icons",
+    title: "Welkom (Mail 1A) — service-iconen",
+    description: "Variant van Mail 1A: de twee serviceberichten onder elkaar als lijst met grote iconen als bullets, in plaats van naast foto's.",
+    section: "designs",
+    Component: WelkomMail1AIcons,
   },
   {
     slug: "welkom-mail-1-fan",
