@@ -42,12 +42,12 @@ export default function NewsletterFooter({ recipientEmail, mode = "light" }: Pro
           <Row className="m-mx-auto" style={{ width: "54px" }}>
             <Column>
               <Link href="https://www.instagram.com/vialuxury">
-                <Img src={`${baseUrl}/images/mail-1a/icon-instagram.png`} alt="Instagram" width="19" height="19" />
+                <Img src={`${baseUrl}/images/mail/icon-instagram.png`} alt="Instagram" width="19" height="19" />
               </Link>
             </Column>
             <Column style={{ paddingLeft: "8px" }}>
               <Link href="https://www.facebook.com/vialuxury">
-                <Img src={`${baseUrl}/images/mail-1a/icon-facebook.png`} alt="Facebook" width="19" height="19" />
+                <Img src={`${baseUrl}/images/mail/icon-facebook.png`} alt="Facebook" width="19" height="19" />
               </Link>
             </Column>
           </Row>
@@ -58,7 +58,7 @@ export default function NewsletterFooter({ recipientEmail, mode = "light" }: Pro
           </Text>
           <Text className="m-center m-small" style={iconText}>
             <Img
-              src={`${baseUrl}/images/mail-1a/icon-phone.png`}
+              src={`${baseUrl}/images/mail/icon-phone.png`}
               alt=""
               width="18"
               height="18"
@@ -68,7 +68,7 @@ export default function NewsletterFooter({ recipientEmail, mode = "light" }: Pro
           </Text>
           <Text className="m-center m-small" style={iconText}>
             <Img
-              src={`${baseUrl}/images/mail-1a/icon-whatsapp.png`}
+              src={`${baseUrl}/images/mail/icon-whatsapp.png`}
               alt=""
               width="18"
               height="18"

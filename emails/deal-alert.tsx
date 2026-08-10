@@ -9,7 +9,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import EmailLayout from "../components/EmailLayout";
-import { brand, font, type EmailMode } from "../components/theme";
+import { baseUrl, brand, font, type EmailMode } from "../components/theme";
 
 type Props = {
   mode?: EmailMode;
@@ -92,7 +92,14 @@ export default function DealAlert({
               key={perk}
               style={{ color: inkText, fontSize: "14px", lineHeight: "24px", margin: 0 }}
             >
-              ✓&nbsp;&nbsp;{perk}
+              <Img
+                src={`${baseUrl}/images/mail/${dark ? "check-dark.png" : "check.png"}`}
+                alt=""
+                width="14"
+                height="14"
+                style={{ display: "inline", verticalAlign: "middle", marginRight: "10px" }}
+              />
+              {perk}
             </Text>
           ))}
         </Section>
@@ -163,5 +170,5 @@ DealAlert.PreviewProps = {
     "Transfer van en naar de luchthaven",
     "Gratis annuleren tot 14 dagen voor vertrek",
   ],
-  imageUrl: "https://picsum.photos/seed/vialuxury-deal/1200/600",
+  imageUrl: `${baseUrl}/images/mail/theme-sea.jpg`,
 } satisfies Props;

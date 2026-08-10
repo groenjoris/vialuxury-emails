@@ -10,7 +10,7 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 import EmailLayout from "../components/EmailLayout";
-import { brand, font, type EmailMode } from "../components/theme";
+import { baseUrl, brand, font, type EmailMode } from "../components/theme";
 
 type Props = {
   mode?: EmailMode;
@@ -175,5 +175,5 @@ BookingConfirmation.PreviewProps = {
   roomType: "Deluxe kamer met zeezicht",
   totalPrice: "€ 1.498",
   bookingNumber: "VL-2026-48213",
-  imageUrl: "https://picsum.photos/seed/vialuxury-resort/1072/520",
+  imageUrl: `${baseUrl}/images/mail/hotel.jpg`,
 } satisfies Props;

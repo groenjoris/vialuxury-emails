@@ -24,10 +24,10 @@ type Props = {
   mode?: EmailMode;
 };
 
-const img = (file: string) => `${baseUrl}/images/mail/${file}`;
+const img = (f: string) => `${baseUrl}/images/mail/${f}`;
 
-// Mobiele opmaak volgt het Figma-frame "mail-1A-customer-mobile":
-// kolommen stapelen, tekst centreert, koppen verkleinen, footer één kolom.
+// Mobiele opmaak volgt het mobile-frame uit de template:
+// kolommen stapelen, tekst centreert, koppen verkleinen, knop volle breedte.
 const responsiveCss = `
 @media only screen and (max-width: 480px) {
   .stack { display: block !important; width: 100% !important; }
@@ -35,21 +35,20 @@ const responsiveCss = `
   .m-h1 { font-size: 26px !important; }
   .m-kop { font-size: 18px !important; }
   .m-small { font-size: 10px !important; }
-  .m-badge { font-size: 10px !important; }
+  .m-bell { font-size: 14px !important; }
   .m-img { width: 100% !important; height: auto !important; }
   .m-mt { margin-top: 16px !important; }
-  .m-mb { margin-bottom: 8px !important; }
   .m-pad { padding-left: 16px !important; padding-right: 16px !important; }
   .m-nopad { padding-left: 0 !important; padding-right: 0 !important; }
   .m-mx-auto { margin-left: auto !important; margin-right: auto !important; }
   .m-only { display: block !important; }
-  .m-btn { display: block !important; text-align: center !important; }
+  .m-btn { display: block !important; text-align: center !important; font-size: 14px !important; }
   .m-logo { width: 143px !important; }
   .m-trustpilot { width: 80px !important; height: auto !important; }
 }
 `;
 
-export default function WelkomMail1A({ recipientName, recipientEmail, mode = "light" }: Props) {
+export default function Mail1B({ recipientName, recipientEmail, mode = "light" }: Props) {
   const c = newsletter[mode];
 
   const kop = {
@@ -89,7 +88,7 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>{responsiveCss}</style>
       </Head>
-      <Preview>Welkom bij ViaLuxury — dit is handig om te weten</Preview>
+      <Preview>Welkom bij ViaLuxury — we houden je op de hoogte van onze mooiste hoteldeals</Preview>
       <Body style={{ backgroundColor: c.bg, margin: 0, padding: 0, fontFamily: font.body }}>
         <Container style={{ width: "100%", maxWidth: "626px" }}>
           <NewsletterHeader mode={mode} />
@@ -109,7 +108,7 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
             </Row>
           </Section>
 
-          {/* Welkom */}
+          {/* Welkom + deals-CTA */}
           <Section className="m-pad" style={{ padding: "24px 10px 0", textAlign: "center" }}>
             <Heading
               as="h1"
@@ -126,96 +125,10 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
               Welkom bij ViaLuxury
             </Heading>
             <Text style={{ ...body14, textAlign: "center" as const }}>
-              Beste {recipientName}, wat leuk dat je bij ons geboekt hebt. Dit is handig om te weten.
-            </Text>
-          </Section>
-
-          {/* Boekingsgegevens */}
-          <Section className="m-pad" style={{ paddingTop: "24px" }}>
-            <Row>
-              <Column className="stack" style={{ width: "301px", verticalAlign: "top" }}>
-                <Img src={img("booking.jpg")} alt="" width="301" height="190" className="m-img" style={photo} />
-              </Column>
-              <Column
-                className="stack m-center m-mt m-nopad"
-                style={{ width: "301px", paddingLeft: "24px", verticalAlign: "top" }}
-              >
-                <Text className="m-kop m-center" style={{ ...kop, margin: 0 }}>
-                  Al je boekingsgegevens op één plek
-                </Text>
-                <Text className="m-center" style={body14}>
-                  Log in met je emailadres, je ontvangt direct een inlogcode. Onder je account vind
-                  je alles terug: data, arrangement en de details van je verblijf.
-                </Text>
-                <Text className="m-center" style={{ margin: "8px 0 0" }}>
-                  <Link href="https://vialuxury.nl/login" style={ctaLink}>
-                    Log in en bekijk je boeking &gt;
-                  </Link>
-                </Text>
-              </Column>
-            </Row>
-          </Section>
-
-          {/* Vragen / FAQ — dir=rtl zodat mobiel de afbeelding bovenaan stapelt */}
-          <Section className="m-pad" style={{ paddingTop: "32px" }}>
-            <Row style={{ direction: "rtl" as const }}>
-              <Column className="stack" style={{ width: "301px", verticalAlign: "top", direction: "ltr" as const }}>
-                <Img src={img("hotel.jpg")} alt="" width="301" height="200" className="m-img" style={photo} />
-              </Column>
-              <Column
-                className="stack m-center m-mt m-nopad"
-                style={{ width: "301px", paddingRight: "24px", verticalAlign: "top", direction: "ltr" as const }}
-              >
-                <Text className="m-kop m-center" style={{ ...kop, margin: 0 }}>
-                  Vragen over je boeking?
-                </Text>
-                <Text className="m-center" style={body14}>
-                  Je boeking vind je in je account. Hulp nodig? Bekijk onze FAQ of neem contact op.
-                </Text>
-                <Text className="m-center" style={{ margin: "8px 0 0" }}>
-                  <Link href="https://vialuxury.nl/faq" style={ctaLink}>
-                    Naar FAQ &gt;
-                  </Link>
-                </Text>
-              </Column>
-            </Row>
-          </Section>
-
-          {/* Mis geen enkele deal */}
-          <Section className="m-pad" style={{ paddingTop: "32px", textAlign: "center" }}>
-            <Text style={{ margin: 0 }}>
-              <span className="m-kop" style={{ ...kop, verticalAlign: "middle" }}>
-                Mis geen enkele deal&nbsp;&nbsp;
-              </span>
-              <span
-                className="m-badge"
-                style={{
-                  backgroundColor: c.badgeBg,
-                  borderRadius: "4px",
-                  color: "#FFFFFF",
-                  fontFamily: font.body,
-                  fontSize: "16px",
-                  fontWeight: 700,
-                  padding: "8px",
-                  verticalAlign: "middle",
-                  display: "inline-block",
-                }}
-              >
-                Tot -65%
-              </span>
-            </Text>
-            <Img
-              src={img("hero-nature.jpg")}
-              alt=""
-              width="626"
-              height="176"
-              className="m-img"
-              style={{ ...photo, border: "none", marginTop: "8px", width: "100%" }}
-            />
-            <Text style={{ ...body14, textAlign: "center" as const, margin: "16px 0 0" }}>
-              We sturen je de beste deals voor hotelarrangementen.
+              Beste {recipientName}, als klant houden we je voortaan op de hoogte van onze mooiste
+              hoteldeals.
               <br />
-              Ook niet-hotel deals ontvangen?
+              Wil je ook andere deals van ViaLuxury zien?
             </Text>
             <Text style={{ margin: "8px 0 0" }}>
               <Img
@@ -226,11 +139,13 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
                 style={{ display: "inline", verticalAlign: "middle", marginRight: "8px" }}
               />
               <span
+                className="m-bell"
                 style={{
                   fontFamily: font.body,
-                  fontSize: "14px",
+                  fontSize: "16px",
                   fontWeight: 700,
-                  color: c.heading,
+                  lineHeight: "1.3",
+                  color: c.text,
                   verticalAlign: "middle",
                 }}
               >
@@ -254,6 +169,57 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
             >
               Alle ViaLuxury deals ontvangen &gt;
             </Button>
+          </Section>
+
+          {/* Boekingsgegevens */}
+          <Section className="m-pad" style={{ paddingTop: "32px" }}>
+            <Row>
+              <Column className="stack" style={{ width: "301px", verticalAlign: "top" }}>
+                <Img src={img("hero-nature.jpg")} alt="" width="301" height="190" className="m-img" style={photo} />
+              </Column>
+              <Column
+                className="stack m-center m-mt m-nopad"
+                style={{ width: "301px", paddingLeft: "24px", verticalAlign: "top" }}
+              >
+                <Text className="m-kop m-center" style={{ ...kop, margin: 0 }}>
+                  Al je boekingsgegevens op één plek
+                </Text>
+                <Text className="m-center" style={body14}>
+                  Log in met je emailadres, je ontvangt direct een inlogcode. Onder je account vind
+                  je alles terug: data, arrangement en de details van je verblijf.
+                </Text>
+                <Text className="m-center" style={{ margin: "8px 0 0" }}>
+                  <Link href="https://vialuxury.nl/login" style={ctaLink}>
+                    Log in en bekijk je boeking &gt;
+                  </Link>
+                </Text>
+              </Column>
+            </Row>
+          </Section>
+
+          {/* Vragen / FAQ — tekst links, foto rechts; mobiel stapelt tekst boven foto */}
+          <Section className="m-pad" style={{ paddingTop: "32px" }}>
+            <Row>
+              <Column
+                className="stack m-center m-nopad"
+                style={{ width: "301px", paddingRight: "24px", verticalAlign: "middle" }}
+              >
+                <Text className="m-kop m-center" style={{ ...kop, margin: 0 }}>
+                  Vragen over je boeking?
+                </Text>
+                <Text className="m-center" style={body14}>
+                  Je boeking vind je in je account. Hulp nodig? Bekijk onze FAQ of neem contact op.
+                </Text>
+                <Text className="m-center" style={{ margin: "8px 0 0" }}>
+                  <Link href="https://vialuxury.nl/faq" style={ctaLink}>
+                    Naar FAQ &gt;
+                  </Link>
+                </Text>
+              </Column>
+              <Column className="stack m-mt" style={{ width: "301px", verticalAlign: "middle" }}>
+                <Img src={img("hotel.jpg")} alt="" width="301" height="200" className="m-img" style={photo} />
+              </Column>
+            </Row>
           </Section>
 
           {/* Thema's */}
@@ -314,7 +280,7 @@ export default function WelkomMail1A({ recipientName, recipientEmail, mode = "li
   );
 }
 
-WelkomMail1A.PreviewProps = {
+Mail1B.PreviewProps = {
   recipientName: "Sanne",
   recipientEmail: "jesse@vialuxury.com",
 } satisfies Props;

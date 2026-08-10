@@ -22,7 +22,7 @@ export default function NewsletterHeader({ mode = "light" }: Props) {
         </Column>
         <Column align="right">
           <Img
-            src={`${baseUrl}/images/mail-1a/trustpilot.png`}
+            src={`${baseUrl}/images/mail/trustpilot.png`}
             alt="Trustpilot 4.5/5 — 15.500+ reviews"
             width="106"
             height="50"
