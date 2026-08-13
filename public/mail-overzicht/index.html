@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- De pagina wordt vanuit public/ geserveerd en is ook bereikbaar op /mail-overzicht
+     (zonder slash, via de rewrite in next.config.ts). Zonder deze base zouden de
+     relatieve paden naar ./emails/ en ./assets/ dan naar de site-root wijzen. -->
+<base href="/mail-overzicht/" />
 <title>ViaLuxury — E-maildesigns</title>
 <meta name="description" content="Alle e-mailontwerpen van ViaLuxury op één plek, met licht/donker- en mobiel/desktop-weergave en de productie-HTML." />
 <link rel="icon" href="./assets/logo-vialuxury-horizontal.svg" />

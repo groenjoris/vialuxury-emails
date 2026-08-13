@@ -5,14 +5,24 @@ Geïmplementeerd uit het Claude Design-project *Folder uitwerken en formulier*, 
 
 ## Draaien
 
-Serveer de map over HTTP (niet `file://` openen — dan blokkeert de browser `fetch`, waardoor
-"Kopieer HTML" en "Download .html" niet werken):
+Deze map staat in `public/`, dus de Next.js-app serveert hem mee. Start de gallery en
+open `/mail-overzicht`:
 
 ```bash
-npx serve -l 4180 .
+npm run dev
 ```
 
-Daarna: <http://localhost:4180/mail-overzicht/> (`python3 -m http.server 4180` werkt ook).
+Daarna: <http://localhost:3200/mail-overzicht> — op Vercel dus `<domein>/mail-overzicht`.
+
+Open de pagina niet via `file://`: dan blokkeert de browser `fetch`, waardoor "Kopieer HTML"
+en "Download .html" niet werken.
+
+Twee dingen maken die URL mogelijk:
+
+- `next.config.ts` bevat een rewrite van `/mail-overzicht` naar `/mail-overzicht/index.html`.
+  Zonder die rewrite geeft de URL zonder `index.html` een 404.
+- `index.html` heeft `<base href="/mail-overzicht/">`. Zonder die base zouden de relatieve
+  paden naar `./emails/` en `./assets/` op de URL zonder slash naar de site-root wijzen.
 
 ## Wat de pagina doet
 
@@ -55,8 +65,34 @@ Ontbreekt een bestand, dan zet de overzichtspagina er automatisch een placeholde
 verwachte pad neer; zodra het bestand er staat verschijnt de echte preview zonder
 codewijziging. Nieuw design toevoegen? Eén entry in de `DESIGNS`-array in `index.html`.
 
+### Waar deze bestanden vandaan komen
+
+Het zijn kopieën van de `.dc.html`-designbestanden uit `dc-templates/Folder uitwerken en
+formulier/`, met `.dc` uit de naam gehaald (`Mail1Av5.dc.html` → `emails/Mail1Av5.html`).
+Ze zijn dus geen uitgeklede productie-HTML maar het volledige designdocument: ze renderen
+via `emails/support.js` (de designruntime) en halen hun afbeeldingen uit `emails/assets/`.
+Beide staan daarom naast de designs in deze map.
+
+Werk je een design bij in het designproject? Kopieer het bestand opnieuw en haal `.dc` uit
+de naam. Bij een nieuwe `support.js` moet de patch hieronder opnieuw worden toegepast.
+
+### Patch in `emails/support.js`
+
+De originele `support.js` leest props alleen uit de `data-props`-defaults van het design,
+niet uit de query string — daardoor deden de licht/donker- en desktop/mobiel-toggles niets.
+Er staat nu één toevoeging in (gemarkeerd met `PATCH (mail-overzicht)`) die props die het
+design zelf declareert ook uit de query string leest, met de defaults als terugval.
+
+### Bekende ruis in de console
+
+Elk design bevat markup als `<img src="{{ bellSrc }}">`. De browser vraagt die letterlijke
+URL op vóórdat `support.js` de DOM herschrijft, dus je ziet een paar 404's op
+`{{ bellSrc }}`, `{{ gripSrc }}`, `{{ helpSrc }}` en `{{ checkSrc }}` langskomen. Daarna
+wordt de echte afbeelding wél geladen; de previews zijn compleet.
+
 ## Merkfonts
 
-`Recoleta-SemiBold.ttf`, `basisgrotesque-regular.ttf` en `basisgrotesque-bold.ttf` zitten niet
-in deze repo. Zet ze in `assets/fonts/` — de `@font-face`-regels in `index.html` verwijzen er
-al naar. Zonder die bestanden valt de pagina terug op Georgia (display) en Helvetica (body).
+`Recoleta-SemiBold.ttf`, `basisgrotesque-regular.ttf` en `basisgrotesque-bold.ttf` staan in
+`assets/fonts/`, waar de `@font-face`-regels in `index.html` naar verwijzen. De designs zelf
+laden hun fonts uit `emails/assets/`. Ontbreken die bestanden, dan valt de pagina terug op
+Georgia (display) en Helvetica (body).

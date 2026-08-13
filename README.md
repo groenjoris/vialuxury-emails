@@ -8,6 +8,11 @@ E-maildesigns voor ViaLuxury, gebouwd met [react-email](https://react.email) en 
 - `components/` — gedeelde bouwstenen: `EmailLayout` (header/footer) en `theme.ts` (huisstijl-tokens)
 - `lib/registry.ts` — lijst van alle e-mails die in de gallery verschijnen
 - `app/` — de gallery-site (overzicht, grote preview met mobiel/desktop-toggle, kopieer/download HTML)
+- `public/mail-overzicht/` — losse statische overzichtspagina op `/mail-overzicht`, die de
+  designbestanden uit het Claude Design-project rechtstreeks rendert (incl. de v2–v5-varianten
+  die nog niet naar React zijn geport). Zie [de eigen README](public/mail-overzicht/README.md).
+- `dc-templates/` — archief van de `.dc.html`-designbronbestanden. Deze map wordt niet
+  gebuild of geserveerd; hij staat er als bron voor de designs.
 
 ## Commando's
 
