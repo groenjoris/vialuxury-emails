@@ -7,7 +7,6 @@ import Mail3Reminder from "@/emails/mail-3-reminder";
 import WelkomMail1A from "@/emails/welkom-mail-1a";
 import WelkomMail1AIcons from "@/emails/welkom-mail-1a-icons";
 import WelkomMail1Fan from "@/emails/welkom-mail-1-fan";
-import VakantieBevestiging from "@/emails/vakantie-bevestiging";
 
 export type EmailSection = "designs" | "inspiration";
 
@@ -22,13 +21,6 @@ export type EmailEntry = {
 };
 
 export const emails: EmailEntry[] = [
-  {
-    slug: "vakantie-bevestiging",
-    title: "Boekingsbevestiging vakantie (multi-hotel)",
-    description: "Bevestiging na het boeken van een auto- of fietsvakantie met meerdere hotels: kassabon per hotel (adres, nachten, inclusies, check-in/out), flexibel annuleren, prijs, routes, boeking terugvinden, cadeaukaart en FAQ.",
-    section: "designs",
-    Component: VakantieBevestiging,
-  },
   {
     slug: "welkom-mail-1a",
     title: "Welkom (Mail 1A)",
